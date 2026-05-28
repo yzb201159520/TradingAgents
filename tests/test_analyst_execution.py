@@ -1,4 +1,5 @@
 import unittest
+import pytest
 
 from tradingagents.graph.analyst_execution import (
     AnalystWallTimeTracker,
@@ -8,7 +9,9 @@ from tradingagents.graph.analyst_execution import (
 )
 
 
+@pytest.mark.smoke
 class AnalystExecutionPlanTests(unittest.TestCase):
+    
     def test_build_plan_preserves_selected_order(self):
         plan = build_analyst_execution_plan(["news", "market"], concurrency_limit=2)
 
