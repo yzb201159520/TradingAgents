@@ -36,7 +36,7 @@ PROVIDER_DEFAULTS = {
     "google": ("gemini-2.5-flash", None),
     "anthropic": ("claude-sonnet-4-6", None),
     "deepseek": ("deepseek-chat", None),
-    "qwen": ("qwen-plus", None),
+    "qwen": ("deepseek-v4-flash", None),
     "glm": ("glm-5", None),
     "xai": ("grok-4", None),
 }
@@ -44,23 +44,23 @@ PROVIDER_DEFAULTS = {
 
 # Minimal but realistic state for the three agents.
 DEBATE_HISTORY = """
-Bull Analyst: NVDA's data-center revenue grew 60% YoY last quarter, driven by
-Blackwell ramp; sovereign AI deals with multiple governments add a $40B+
-multi-year tailwind. Margins remain above peer average.
+Bull Analyst: 分众传媒(002027.SZ)是中国梯媒绝对龙头，占据约95%电梯海报
+市场份额。新消费品牌崛起带动广告投放回暖，境外市场(韩国、东南亚、中东)
+点位持续扩张，提供增量收入。公司保持高分红率(近年超80%)，现金流稳定。
 
-Bear Analyst: Concentration risk is real — top three customers are >40% of
-revenue. Any pause in hyperscaler capex would compress the multiple. China
-export restrictions still cap a meaningful portion of demand.
+Bear Analyst: 宏观经济不确定性导致广告主预算收紧，互联网广告持续分流
+品牌广告投放。影院广告业务受票房波动影响较大。境外扩张尚处投入期，
+短期对利润有摊薄效应。
 """
 
 
 def _make_rm_state():
     return {
-        "company_of_interest": "NVDA",
+        "company_of_interest": "002027.SZ",
         "investment_debate_state": {
             "history": DEBATE_HISTORY,
-            "bull_history": "Bull Analyst: NVDA's data-center revenue grew 60% YoY...",
-            "bear_history": "Bear Analyst: Concentration risk is real...",
+            "bull_history": "Bull Analyst: 分众传媒是中国梯媒绝对龙头...",
+            "bear_history": "Bear Analyst: 宏观经济不确定性导致广告主预算收紧...",
             "current_response": "",
             "judge_decision": "",
             "count": 1,
@@ -70,14 +70,14 @@ def _make_rm_state():
 
 def _make_trader_state(investment_plan: str):
     return {
-        "company_of_interest": "NVDA",
+        "company_of_interest": "002027.SZ",
         "investment_plan": investment_plan,
     }
 
 
 def _make_pm_state(investment_plan: str, trader_plan: str):
     return {
-        "company_of_interest": "NVDA",
+        "company_of_interest": "002027.SZ",
         "past_context": "",
         "risk_debate_state": {
             "history": "Aggressive: lean in. Conservative: trim. Neutral: balanced sizing.",
@@ -90,10 +90,10 @@ def _make_pm_state(investment_plan: str, trader_plan: str):
             "current_neutral_response": "",
             "count": 1,
         },
-        "market_report": "Market report.",
-        "sentiment_report": "Sentiment report.",
-        "news_report": "News report.",
-        "fundamentals_report": "Fundamentals report.",
+        "market_report": "A股市场整体震荡，消费板块轮动。",
+        "sentiment_report": "机构持仓稳定，北向资金小幅流入。",
+        "news_report": "分众传媒发布三季报，营收同比微增。",
+        "fundamentals_report": "毛利率约60%，ROE超20%，分红率超80%。",
         "investment_plan": investment_plan,
         "trader_investment_plan": trader_plan,
     }
